@@ -1,0 +1,28 @@
+{
+  "name": "taxcalculators",
+  "version": "1.0.0",
+  "description": "<img     alt=\"My App\"     style=\"margin: 0 auto;\"     src=\"https://github.com/explodinglabs/taxcalculators/blob/main/logo.png?raw=true\" />",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/explodinglabs/taxcalculators.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/explodinglabs/taxcalculators/issues"
+  },
+  "homepage": "https://github.com/explodinglabs/taxcalculators#readme",
+  "devDependencies": {
+    "elm-review": "^2.7.2",
+    "elm-test": "^0.19.1-revision7",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1"
+  }
+}
