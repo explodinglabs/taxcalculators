@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y npm
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY static /usr/share/nginx/html
+COPY docs /usr/share/nginx/html
 COPY . /app
 WORKDIR /app
 

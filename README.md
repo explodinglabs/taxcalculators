@@ -1,8 +1,4 @@
-<img
-    alt="My App"
-    style="margin: 0 auto;"
-    src="https://github.com/explodinglabs/taxcalculators/blob/main/logo.png?raw=true"
-/>
+# Tax Calculators
 
 We use a custom nginx container to serve the static files built by Elm.
 
@@ -12,6 +8,9 @@ SSL certificates or redirect port 80 to 443.
 ```sh
 docker run --rm --name taxcalculators --network explodinglabs --publish 80:80 -v ${PWD}/nginx-dev.conf:/etc/nginx/nginx.conf -v ${PWD}/docs:/usr/share/nginx/html ghcr.io/explodinglabs/taxcalculators  |grep -v '"HEAD '
 ```
+
+Run `elm make --output docs/elm.js` to build the app. (For me, this happens
+when I save in Vim).
 
 Visit [http://localhost/](http://localhost/).
 
