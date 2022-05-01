@@ -10,8 +10,7 @@ For development, start the container (which starts nginx, due to the base image
 being nginx). For development we use a different nginx.conf which *doesn't* use
 SSL certificates or redirect port 80 to 443.
 ```sh
-mkdir docs  # Output files are written here
-docker run --rm --name taxcalculators --network explodinglabs --publish 80:80 -v ${PWD}/docs:/usr/share/nginx/html:rw -v ${PWD}/nginx-dev.conf:/etc/nginx/nginx.conf -v ${PWD}/static:/usr/share/nginx/html ghcr.io/explodinglabs/taxcalculators  |grep -v '"HEAD '
+docker run --rm --name taxcalculators --network explodinglabs --publish 80:80 -v ${PWD}/nginx-dev.conf:/etc/nginx/nginx.conf -v ${PWD}/docs:/usr/share/nginx/html ghcr.io/explodinglabs/taxcalculators  |grep -v '"HEAD '
 ```
 
 Visit [http://localhost/](http://localhost/).
