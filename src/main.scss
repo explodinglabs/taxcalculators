@@ -96,8 +96,8 @@ main {
     header {
         h1 {
             @extend .titletext;
-            padding: $space * 2 $space 0;
-            margin-bottom: $space / 2;
+            padding: $space * 3 $space 0 $space;
+            margin-bottom: $space;
             width: 100%;
             text-align: center;
             display: inline-block;
@@ -119,6 +119,7 @@ main {
         display: block;
         width: 100%;
         max-width: 300px;
+        margin-bottom: $space;
     }
 
     .result {
@@ -156,7 +157,7 @@ main {
     h2 {
         font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
         text-align: center;
-        margin: $space 0 $space/2;
+        margin-bottom: $space/2;
         font-size: 22px;
         font-style: normal;
         font-weight: 500;
