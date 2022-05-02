@@ -6,9 +6,6 @@
   "directories": {
     "doc": "docs"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/explodinglabs/taxcalculators.git"
@@ -20,8 +17,12 @@
   },
   "homepage": "https://github.com/explodinglabs/taxcalculators#readme",
   "devDependencies": {
-    "elm-review": "^2.7.2",
+    "elm-format": "^0.8.5",
     "elm-test": "^0.19.1-revision7",
+    "sass": "^1.51.0"
+  },
+  "dependencies": {
+    "elm-review": "^2.7.2",
     "husky": "^7.0.4",
     "lint-staged": "^12.4.1"
   }

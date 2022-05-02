@@ -1,0 +1,345 @@
+$space: 25px;
+$content-width: 820px;
+$on-palm: 600px;
+
+// Colors
+$blockquote: hsl(148, 52, 60);
+$inlinecode: hsl(53, 100, 89);
+$nav: hsl(266, 100, 32);
+
+@mixin media-query($device) {
+    @media screen and (max-width: $device) {
+        @content;
+    }
+}
+
+/* Clearfix */
+%clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+/**
+ * Wrapper
+ */
+.wrapper {
+    @extend %clearfix;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $content-width;
+}
+
+/* Reset some basic elements */
+body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #fefefe;
+    background: linear-gradient(calc(var(45) * 1deg), var(hsl(280, 60%, 5%)) calc(var(40) * 1%), var(hsl(280, 90%, 15%)) calc(var(40) * 1%));
+}
+
+nav {
+    background-color: black;
+    box-shadow: 0 5px 5px -2px #999;
+    text-align: right;
+    padding: 10px 0 2px;
+    .logo {
+        @extend .wrapper;
+        img {
+            height: 30px;
+        }
+    }
+    padding-right: $space;
+}
+
+.titletext {
+    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: -0.527999997138977px;
+    line-height: 130%;
+}
+
+.bodytext {
+    color: rgb(35, 38, 41);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Adjusted", "Segoe UI", "Liberation Sans", sans-serif;
+    font-size: 16px;
+    @include media-query($on-palm) {
+        font-size: 18px;
+    }
+    font-stretch: normal;
+    font-style: normal;
+    font-variant-caps: normal;
+    font-weight: 400;
+    height: auto;
+    line-height: 170%;
+    text-align: start;
+    width: auto;
+    word-break: break-word;
+}
+
+.linktext {
+    color: hsl(199.22, 100, 30);
+    text-decoration: none;
+    &:visited { color: purple; }
+    &:hover { color: orange; }
+}
+
+main {
+
+    header {
+        h1 {
+            @extend .titletext;
+            padding: $space * 2 $space 0;
+            margin-bottom: $space / 2;
+            width: 100%;
+            text-align: center;
+            display: inline-block;
+        }
+    }
+
+    input {
+        @extend .bodytext;
+        padding: 2px 20px;
+        font-size: 2rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: black;
+        border-radius: 10px;
+        text-align: center;
+        outline: transparent;
+        transition: border-color calc(var(0.2, 0.2) * 1s) ease;
+        margin: auto;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .result {
+        @extend .bodytext;
+        padding: 2px 20px;
+        font-size: 2rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: black;
+        border-radius: 10px;
+        background-color: #eee;
+        text-align: center;
+        outline: transparent;
+        transition: border-color calc(var(0.2, 0.2) * 1s) ease;
+        margin: auto;
+        display: block;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    #intro {
+        @extend .bodytext;
+        margin-bottom: $space;
+    }
+
+    #intro p {
+        padding: 0;
+        margin: 0;
+        margin-bottom: 0;
+        font-weight: 500;
+        background: linear-gradient(104deg, rgba(130, 255, 173,0) 0.9%, rgba(130, 255, 173,1.25) 2.4%, rgba(130, 255, 173,0.5) 5.8%, rgba(130, 255, 173,0.1) 93%, rgba(130, 255, 173,0.7) 96%, rgba(130, 255, 1732,0) 98%), linear-gradient(183deg, rgba(130, 255, 173,0) 0%, rgba(130, 255, 173,0.3) 7.9%, rgba(130, 255, 173,0) 15%);
+        padding: 0.6em $space;
+    }
+
+    h2 {
+        font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        text-align: center;
+        margin: $space 0 $space/2;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: normal;
+    }
+
+    h3 {
+        margin: $space * 1.5 0 $space 0;
+        font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 19px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: normal;
+        line-height: 22px;
+    }
+
+    a {
+        @extend .linktext;
+        text-decoration: underline;
+    }
+
+    p {
+        @extend .bodytext;
+        margin: 0 $space;
+        margin-bottom: $space;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    ul, ol {
+        @extend .bodytext;
+        margin: 0 $space;
+        margin-bottom: $space;
+        margin-left: $space * 2.5;
+        @include media-query($on-palm) {
+            margin-left: $space * 2;
+        }
+        li {
+            margin-bottom: 0;
+        }
+        :last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    img {
+        max-width: 100%;
+        vertical-align: middle;
+    }
+
+    .warning {
+        margin: 0 $space;
+        margin-bottom: $space;
+
+        p {
+            font-style: italic;
+        }
+
+        p:last-child {
+            margin: 0;
+        }
+
+        p:first-child:before {
+            content: "⚠️  ";  //Warning emoji (can't see it inthe terminal font)
+            margin-right: 5px;
+        }
+    }
+
+    pre, code {
+        font-family: "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        font-variant-caps: normal;
+        font-weight: normal;
+        @include media-query($on-palm) {
+            font-size: 16px;
+            letter-spacing: -0.3px;
+        }
+    }
+
+    /* Inline code using single backticks */
+    p code, li code {
+        background-color: $inlinecode;
+        border: 1px solid desaturate(adjust-hue(darken($inlinecode, 30%), -15%), 10%);
+        border-radius: 3px;
+        padding: 3px 3px;
+    }
+
+    .highlight {
+        border-radius: 5px;
+        background-color: hsl(320, 0, 93);
+        /*
+        color: #1e1e1e;
+        .bp, .vc, .vg, .vi, .na, .nb, .nc, .no, .ni, .ne, .nf, .nl, .nn, .nt, .nv {
+            color: #cc2266;
+            text-decoration: none;
+        }
+        */
+    }
+
+    pre.highlight {
+        line-height: 160%;
+        margin-bottom: $space;
+        overflow-x: auto;
+        padding: $space/2 $space;
+    }
+
+    blockquote {
+        border-radius: 5px;
+        background-color: #ffd;
+        padding: $space;
+        margin-bottom: $space;
+
+        p {
+            font-style: italic;
+            margin-bottom: $space;
+            margin: 0;
+        }
+
+        p:first-child:before {
+            content: "\201C  ";
+            font-size: 60px;
+            position: relative;
+            top: 20px;
+            line-height: 0%;
+            color: darken($blockquote, 40%);
+        }
+
+        cite {
+            margin-top: $space/2;
+            font-size: smaller;
+            font-style: normal;
+            color: #666;
+            text-align: right;
+            display: block;
+        }
+    }
+
+    .video-container {
+        background-color: black;
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+        margin-top: $space;
+        margin-bottom: $space;
+    }
+
+    .video-container iframe, .video-container object, .video-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .icon {
+        > svg {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            vertical-align: middle;
+            path {
+                fill: #444;
+            }
+        }
+    }
+
+    .wide-logos {
+        float: right;
+        margin-left: $space;
+        @include media-query($on-palm) {
+            /* It's not wide enough to show these */
+            display: none;
+        }
+    }
+
+    footer {
+        @extend .bodytext;
+        font-size: smaller;
+        margin: $space*1.5 $space;
+    }
+
+}

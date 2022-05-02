@@ -16,7 +16,8 @@ Visit [http://localhost/](http://localhost/).
 
 ## Production
 
-For Github Pages, simply push to production.
+For Github Pages, simply commit to `main` and push. It will serve the contents
+of `docs`.
 
 For Dockerised production, mount the LetsEncrypt keys into the container, and
 expose port 443:
