@@ -36,7 +36,7 @@ calc income =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( Model "50000"
+    ( Model ""
     , Cmd.none
     )
 
