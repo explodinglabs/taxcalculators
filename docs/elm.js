@@ -5623,7 +5623,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$input,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('text'),
+						$elm$html$Html$Attributes$type_('tel'),
 						$elm$html$Html$Attributes$value('$' + model.income),
 						$elm$html$Html$Events$onInput($author$project$Main$Income),
 						$elm$html$Html$Attributes$autofocus(true)
