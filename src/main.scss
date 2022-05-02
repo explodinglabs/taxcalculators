@@ -40,7 +40,6 @@ body, h1, h2, h3, h4, h5, h6, p, blockquote, pre, hr, dl, dd, ol, ul, figure {
 
 body {
     background-color: #fefefe;
-    background: linear-gradient(calc(var(45) * 1deg), var(hsl(280, 60%, 5%)) calc(var(40) * 1%), var(hsl(280, 90%, 15%)) calc(var(40) * 1%));
 }
 
 nav {
@@ -59,7 +58,6 @@ nav {
 
 .titletext {
     font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 32px;
     font-style: normal;
     font-weight: 700;
     letter-spacing: -0.527999997138977px;
@@ -92,30 +90,27 @@ nav {
 }
 
 main {
-
     header {
+        margin-top: $space * 1.5;
         h1 {
             @extend .titletext;
-            padding: $space * 3 $space 0 $space;
-            margin-bottom: $space;
-            width: 100%;
+            margin-bottom: $space / 1.5;
+            font-size: 28px;
             text-align: center;
-            display: inline-block;
         }
     }
 
     input {
         @extend .bodytext;
-        padding: 2px 20px;
         font-size: 2rem;
-        border-width: 2px;
+        border-width: 1px;
         border-style: solid;
         border-color: black;
-        border-radius: 10px;
+        border-radius: 5px;
         text-align: center;
         outline: transparent;
-        transition: border-color calc(var(0.2, 0.2) * 1s) ease;
         margin: auto;
+        padding: 0;
         display: block;
         width: 100%;
         max-width: 300px;
@@ -124,16 +119,8 @@ main {
 
     .result {
         @extend .bodytext;
-        padding: 2px 20px;
         font-size: 2rem;
-        border-width: 2px;
-        border-style: solid;
-        border-color: black;
-        border-radius: 10px;
-        background-color: #eee;
         text-align: center;
-        outline: transparent;
-        transition: border-color calc(var(0.2, 0.2) * 1s) ease;
         margin: auto;
         display: block;
         width: 100%;
@@ -155,23 +142,20 @@ main {
     }
 
     h2 {
-        font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        text-align: center;
-        margin-bottom: $space/2;
-        font-size: 22px;
-        font-style: normal;
+        @extend .titletext;
+        margin: $space $space $space/3 $space;
+        font-size: 20px;
         font-weight: 500;
-        letter-spacing: normal;
+        line-height: 100%;
+        text-align: center;
     }
 
     h3 {
+        @extend .titletext;
         margin: $space * 1.5 0 $space 0;
-        font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        font-size: 19px;
-        font-style: normal;
+        font-size: 18px;
         font-weight: 500;
-        letter-spacing: normal;
-        line-height: 22px;
+        line-height: 100%;
     }
 
     a {

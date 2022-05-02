@@ -50,6 +50,10 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
+    let
+        income =
+            Maybe.withDefault 0 <| String.toFloat model.income
+    in
     node "main"
         [ class "wrapper" ]
         [ node "header"
@@ -59,7 +63,9 @@ view model =
         , h2 [] [ text "Taxable Income" ]
         , input [ type_ "tel", value <| "$" ++ model.income, onInput Income, autofocus True ] []
         , h2 [] [ text "Tax Payable" ]
-        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| Round.round 2 (calc <| Maybe.withDefault 0 <| String.toFloat model.income)) ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| Round.round 2 (calc income)) ]
+        , h2 [] [ text "Net after Tax" ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| Round.round 2 (income - calc income)) ]
         ]
 
 

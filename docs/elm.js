@@ -5589,6 +5589,10 @@ var $elm$core$String$toFloat = _String_toFloat;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$view = function (model) {
+	var income = A2(
+		$elm$core$Maybe$withDefault,
+		0,
+		$elm$core$String$toFloat(model.income));
 	return A3(
 		$elm$html$Html$node,
 		'main',
@@ -5652,11 +5656,32 @@ var $author$project$Main$view = function (model) {
 							A2(
 								$myrho$elm_round$Round$round,
 								2,
-								$author$project$Main$calc(
-									A2(
-										$elm$core$Maybe$withDefault,
-										0,
-										$elm$core$String$toFloat(model.income))))))
+								$author$project$Main$calc(income))))
+					])),
+				A2(
+				$elm$html$Html$h2,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text('Net after Tax')
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('result')
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						'$' + A3(
+							$elm$core$String$replace,
+							'.00',
+							'',
+							A2(
+								$myrho$elm_round$Round$round,
+								2,
+								income - $author$project$Main$calc(income))))
 					]))
 			]));
 };
