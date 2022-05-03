@@ -5253,6 +5253,14 @@ var $author$project$Main$update = F2(
 var $author$project$Main$Income = function (a) {
 	return {$: 'Income', a: a};
 };
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $elm$json$Json$Encode$bool = _Json_wrap;
 var $elm$html$Html$Attributes$boolProperty = F2(
 	function (key, bool) {
@@ -5276,63 +5284,116 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
-var $elm$html$Html$input = _VirtualDom_node('input');
-var $elm$virtual_dom$VirtualDom$node = function (tag) {
-	return _VirtualDom_node(
-		_VirtualDom_noScript(tag));
-};
-var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
-var $elm$html$Html$Events$alwaysStop = function (x) {
-	return _Utils_Tuple2(x, true);
-};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+var $cuducos$elm_format_number$FormatNumber$Parser$FormattedNumber = F5(
+	function (original, integers, decimals, prefix, suffix) {
+		return {decimals: decimals, integers: integers, original: original, prefix: prefix, suffix: suffix};
 	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$at = F2(
-	function (fields, decoder) {
-		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+var $cuducos$elm_format_number$FormatNumber$Parser$Negative = {$: 'Negative'};
+var $cuducos$elm_format_number$FormatNumber$Parser$Positive = {$: 'Positive'};
+var $cuducos$elm_format_number$FormatNumber$Parser$Zero = {$: 'Zero'};
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
 	});
-var $elm$json$Json$Decode$string = _Json_decodeString;
-var $elm$html$Html$Events$targetValue = A2(
-	$elm$json$Json$Decode$at,
-	_List_fromArray(
-		['target', 'value']),
-	$elm$json$Json$Decode$string);
-var $elm$html$Html$Events$onInput = function (tagger) {
-	return A2(
-		$elm$html$Html$Events$stopPropagationOn,
-		'input',
-		A2(
-			$elm$json$Json$Decode$map,
-			$elm$html$Html$Events$alwaysStop,
-			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
 };
-var $elm$core$String$replace = F3(
-	function (before, after, string) {
-		return A2(
-			$elm$core$String$join,
-			after,
-			A2($elm$core$String$split, before, string));
-	});
-var $elm$core$Basics$not = _Basics_not;
+var $elm$core$List$singleton = function (value) {
+	return _List_fromArray(
+		[value]);
+};
+var $cuducos$elm_format_number$FormatNumber$Parser$classify = function (formatted) {
+	var onlyZeros = A2(
+		$elm$core$String$all,
+		function (_char) {
+			return _Utils_eq(
+				_char,
+				_Utils_chr('0'));
+		},
+		$elm$core$String$concat(
+			A2(
+				$elm$core$List$append,
+				formatted.integers,
+				$elm$core$List$singleton(formatted.decimals))));
+	return onlyZeros ? $cuducos$elm_format_number$FormatNumber$Parser$Zero : ((formatted.original < 0) ? $cuducos$elm_format_number$FormatNumber$Parser$Negative : $cuducos$elm_format_number$FormatNumber$Parser$Positive);
+};
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
+var $elm$core$Bitwise$and = _Bitwise_and;
+var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
+var $elm$core$String$repeatHelp = F3(
+	function (n, chunk, result) {
+		return (n <= 0) ? result : A3(
+			$elm$core$String$repeatHelp,
+			n >> 1,
+			_Utils_ap(chunk, chunk),
+			(!(n & 1)) ? result : _Utils_ap(result, chunk));
+	});
+var $elm$core$String$repeat = F2(
+	function (n, chunk) {
+		return A3($elm$core$String$repeatHelp, n, chunk, '');
+	});
+var $cuducos$elm_format_number$FormatNumber$Parser$addZerosToFit = F2(
+	function (desiredLength, value) {
+		var length = $elm$core$String$length(value);
+		var missing = (_Utils_cmp(length, desiredLength) < 0) ? $elm$core$Basics$abs(desiredLength - length) : 0;
+		return _Utils_ap(
+			value,
+			A2($elm$core$String$repeat, missing, '0'));
+	});
+var $elm$core$String$dropRight = F2(
+	function (n, string) {
+		return (n < 1) ? string : A3($elm$core$String$slice, 0, -n, string);
+	});
 var $elm$core$Basics$neq = _Utils_notEqual;
+var $elm$core$String$right = F2(
+	function (n, string) {
+		return (n < 1) ? '' : A3(
+			$elm$core$String$slice,
+			-n,
+			$elm$core$String$length(string),
+			string);
+	});
+var $cuducos$elm_format_number$FormatNumber$Parser$removeZeros = function (decimals) {
+	return (A2($elm$core$String$right, 1, decimals) !== '0') ? decimals : $cuducos$elm_format_number$FormatNumber$Parser$removeZeros(
+		A2($elm$core$String$dropRight, 1, decimals));
+};
+var $cuducos$elm_format_number$FormatNumber$Parser$getDecimals = F2(
+	function (locale, digits) {
+		var _v0 = locale.decimals;
+		switch (_v0.$) {
+			case 'Max':
+				return $cuducos$elm_format_number$FormatNumber$Parser$removeZeros(digits);
+			case 'Exact':
+				return digits;
+			default:
+				var min = _v0.a;
+				return A2($cuducos$elm_format_number$FormatNumber$Parser$addZerosToFit, min, digits);
+		}
+	});
+var $elm$core$Tuple$second = function (_v0) {
+	var y = _v0.b;
+	return y;
+};
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $elm$core$Basics$not = _Basics_not;
 var $myrho$elm_round$Round$addSign = F2(
 	function (signed, str) {
 		var isNotZero = A2(
@@ -5349,7 +5410,6 @@ var $myrho$elm_round$Round$addSign = F2(
 			(signed && isNotZero) ? '-' : '',
 			str);
 	});
-var $elm$core$String$fromFloat = _String_fromNumber;
 var $elm$core$String$cons = _String_cons;
 var $elm$core$Char$fromCode = _Char_fromCode;
 var $myrho$elm_round$Round$increaseNum = function (_v0) {
@@ -5391,20 +5451,6 @@ var $elm$core$Maybe$map = F2(
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
 };
-var $elm$core$Bitwise$and = _Bitwise_and;
-var $elm$core$Bitwise$shiftRightBy = _Bitwise_shiftRightBy;
-var $elm$core$String$repeatHelp = F3(
-	function (n, chunk, result) {
-		return (n <= 0) ? result : A3(
-			$elm$core$String$repeatHelp,
-			n >> 1,
-			_Utils_ap(chunk, chunk),
-			(!(n & 1)) ? result : _Utils_ap(result, chunk));
-	});
-var $elm$core$String$repeat = F2(
-	function (n, chunk) {
-		return A3($elm$core$String$repeatHelp, n, chunk, '');
-	});
 var $elm$core$String$padRight = F3(
 	function (n, _char, string) {
 		return _Utils_ap(
@@ -5583,10 +5629,214 @@ var $myrho$elm_round$Round$round = $myrho$elm_round$Round$roundFun(
 				}
 			}
 		}));
+var $elm$core$List$tail = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(xs);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $cuducos$elm_format_number$FormatNumber$Parser$splitInParts = F2(
+	function (locale, value) {
+		var toString = function () {
+			var _v1 = locale.decimals;
+			switch (_v1.$) {
+				case 'Max':
+					var max = _v1.a;
+					return $myrho$elm_round$Round$round(max);
+				case 'Min':
+					return $elm$core$String$fromFloat;
+				default:
+					var exact = _v1.a;
+					return $myrho$elm_round$Round$round(exact);
+			}
+		}();
+		var asList = A2(
+			$elm$core$String$split,
+			'.',
+			toString(value));
+		var decimals = function () {
+			var _v0 = $elm$core$List$tail(asList);
+			if (_v0.$ === 'Just') {
+				var values = _v0.a;
+				return A2(
+					$elm$core$Maybe$withDefault,
+					'',
+					$elm$core$List$head(values));
+			} else {
+				return '';
+			}
+		}();
+		var integers = A2(
+			$elm$core$Maybe$withDefault,
+			'',
+			$elm$core$List$head(asList));
+		return _Utils_Tuple2(integers, decimals);
+	});
+var $cuducos$elm_format_number$FormatNumber$Parser$splitByIndian = function (integers) {
+	var thousand = ($elm$core$String$length(integers) > 3) ? A2($elm$core$String$right, 3, integers) : integers;
+	var reversedSplitHundreds = function (value) {
+		return ($elm$core$String$length(value) > 2) ? A2(
+			$elm$core$List$cons,
+			A2($elm$core$String$right, 2, value),
+			reversedSplitHundreds(
+				A2($elm$core$String$dropRight, 2, value))) : ((!$elm$core$String$length(value)) ? _List_Nil : _List_fromArray(
+			[value]));
+	};
+	return $elm$core$List$reverse(
+		A2(
+			$elm$core$List$cons,
+			thousand,
+			reversedSplitHundreds(
+				A2($elm$core$String$dropRight, 3, integers))));
+};
+var $cuducos$elm_format_number$FormatNumber$Parser$splitByWestern = function (integers) {
+	var reversedSplitThousands = function (value) {
+		return ($elm$core$String$length(value) > 3) ? A2(
+			$elm$core$List$cons,
+			A2($elm$core$String$right, 3, value),
+			reversedSplitThousands(
+				A2($elm$core$String$dropRight, 3, value))) : _List_fromArray(
+			[value]);
+	};
+	return $elm$core$List$reverse(
+		reversedSplitThousands(integers));
+};
+var $cuducos$elm_format_number$FormatNumber$Parser$splitIntegers = F2(
+	function (system, integers) {
+		if (system.$ === 'Western') {
+			return $cuducos$elm_format_number$FormatNumber$Parser$splitByWestern(
+				A2($elm$core$String$filter, $elm$core$Char$isDigit, integers));
+		} else {
+			return $cuducos$elm_format_number$FormatNumber$Parser$splitByIndian(
+				A2($elm$core$String$filter, $elm$core$Char$isDigit, integers));
+		}
+	});
+var $cuducos$elm_format_number$FormatNumber$Parser$parse = F2(
+	function (locale, original) {
+		var parts = A2($cuducos$elm_format_number$FormatNumber$Parser$splitInParts, locale, original);
+		var integers = A2(
+			$cuducos$elm_format_number$FormatNumber$Parser$splitIntegers,
+			locale.system,
+			A2($elm$core$String$filter, $elm$core$Char$isDigit, parts.a));
+		var decimals = A2($cuducos$elm_format_number$FormatNumber$Parser$getDecimals, locale, parts.b);
+		var partial = A5($cuducos$elm_format_number$FormatNumber$Parser$FormattedNumber, original, integers, decimals, '', '');
+		var _v0 = $cuducos$elm_format_number$FormatNumber$Parser$classify(partial);
+		switch (_v0.$) {
+			case 'Negative':
+				return _Utils_update(
+					partial,
+					{prefix: locale.negativePrefix, suffix: locale.negativeSuffix});
+			case 'Positive':
+				return _Utils_update(
+					partial,
+					{prefix: locale.positivePrefix, suffix: locale.positiveSuffix});
+			default:
+				return _Utils_update(
+					partial,
+					{prefix: locale.zeroPrefix, suffix: locale.zeroSuffix});
+		}
+	});
+var $cuducos$elm_format_number$FormatNumber$Stringfy$formatDecimals = F2(
+	function (locale, decimals) {
+		return (decimals === '') ? '' : _Utils_ap(locale.decimalSeparator, decimals);
+	});
+var $cuducos$elm_format_number$FormatNumber$Stringfy$stringfy = F2(
+	function (locale, formatted) {
+		var stringfyDecimals = $cuducos$elm_format_number$FormatNumber$Stringfy$formatDecimals(locale);
+		var integers = A2($elm$core$String$join, locale.thousandSeparator, formatted.integers);
+		var decimals = stringfyDecimals(formatted.decimals);
+		return $elm$core$String$concat(
+			_List_fromArray(
+				[formatted.prefix, integers, decimals, formatted.suffix]));
+	});
+var $cuducos$elm_format_number$FormatNumber$format = F2(
+	function (locale, number_) {
+		return A2(
+			$cuducos$elm_format_number$FormatNumber$Stringfy$stringfy,
+			locale,
+			A2($cuducos$elm_format_number$FormatNumber$Parser$parse, locale, number_));
+	});
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$virtual_dom$VirtualDom$node = function (tag) {
+	return _VirtualDom_node(
+		_VirtualDom_noScript(tag));
+};
+var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
+var $elm$html$Html$Events$alwaysStop = function (x) {
+	return _Utils_Tuple2(x, true);
+};
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
+var $elm$json$Json$Decode$at = F2(
+	function (fields, decoder) {
+		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
+	});
+var $elm$json$Json$Decode$string = _Json_decodeString;
+var $elm$html$Html$Events$targetValue = A2(
+	$elm$json$Json$Decode$at,
+	_List_fromArray(
+		['target', 'value']),
+	$elm$json$Json$Decode$string);
+var $elm$html$Html$Events$onInput = function (tagger) {
+	return A2(
+		$elm$html$Html$Events$stopPropagationOn,
+		'input',
+		A2(
+			$elm$json$Json$Decode$map,
+			$elm$html$Html$Events$alwaysStop,
+			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
+};
+var $elm$core$String$replace = F3(
+	function (before, after, string) {
+		return A2(
+			$elm$core$String$join,
+			after,
+			A2($elm$core$String$split, before, string));
+	});
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$core$String$toFloat = _String_toFloat;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $cuducos$elm_format_number$FormatNumber$Locales$Exact = function (a) {
+	return {$: 'Exact', a: a};
+};
+var $cuducos$elm_format_number$FormatNumber$Locales$Min = function (a) {
+	return {$: 'Min', a: a};
+};
+var $cuducos$elm_format_number$FormatNumber$Locales$Western = {$: 'Western'};
+var $cuducos$elm_format_number$FormatNumber$Locales$base = {
+	decimalSeparator: '.',
+	decimals: $cuducos$elm_format_number$FormatNumber$Locales$Min(0),
+	negativePrefix: '−',
+	negativeSuffix: '',
+	positivePrefix: '',
+	positiveSuffix: '',
+	system: $cuducos$elm_format_number$FormatNumber$Locales$Western,
+	thousandSeparator: '',
+	zeroPrefix: '',
+	zeroSuffix: ''
+};
+var $cuducos$elm_format_number$FormatNumber$Locales$usLocale = _Utils_update(
+	$cuducos$elm_format_number$FormatNumber$Locales$base,
+	{
+		decimals: $cuducos$elm_format_number$FormatNumber$Locales$Exact(2),
+		thousandSeparator: ','
+	});
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$view = function (model) {
 	var income = A2(
@@ -5627,7 +5877,8 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$input,
 				_List_fromArray(
 					[
-						$elm$html$Html$Attributes$type_('tel'),
+						$elm$html$Html$Attributes$type_('input'),
+						A2($elm$html$Html$Attributes$attribute, 'inputmode', 'numeric'),
 						$elm$html$Html$Attributes$value('$' + model.income),
 						$elm$html$Html$Events$onInput($author$project$Main$Income),
 						$elm$html$Html$Attributes$autofocus(true)
@@ -5654,8 +5905,8 @@ var $author$project$Main$view = function (model) {
 							'.00',
 							'',
 							A2(
-								$myrho$elm_round$Round$round,
-								2,
+								$cuducos$elm_format_number$FormatNumber$format,
+								$cuducos$elm_format_number$FormatNumber$Locales$usLocale,
 								$author$project$Main$calc(income))))
 					])),
 				A2(
@@ -5679,8 +5930,8 @@ var $author$project$Main$view = function (model) {
 							'.00',
 							'',
 							A2(
-								$myrho$elm_round$Round$round,
-								2,
+								$cuducos$elm_format_number$FormatNumber$format,
+								$cuducos$elm_format_number$FormatNumber$Locales$usLocale,
 								income - $author$project$Main$calc(income))))
 					]))
 			]));

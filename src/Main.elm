@@ -1,10 +1,11 @@
 module Main exposing (main)
 
 import Browser
+import FormatNumber exposing (format)
+import FormatNumber.Locales exposing (usLocale)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onInput)
-import Round
 
 
 type alias Model =
@@ -61,11 +62,11 @@ view model =
             [ h1 [] [ text "Australian Income Tax Calculator 2022" ]
             ]
         , h2 [] [ text "Taxable Income" ]
-        , input [ type_ "tel", value <| "$" ++ model.income, onInput Income, autofocus True ] []
+        , input [ type_ "input", attribute "inputmode" "numeric", value <| "$" ++ model.income, onInput Income, autofocus True ] []
         , h2 [] [ text "Tax Payable" ]
-        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| Round.round 2 (calc income)) ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale (calc income)) ]
         , h2 [] [ text "Net after Tax" ]
-        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| Round.round 2 (income - calc income)) ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale (income - calc income)) ]
         ]
 
 
