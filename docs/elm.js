@@ -5770,6 +5770,12 @@ var $cuducos$elm_format_number$FormatNumber$format = F2(
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$Attributes$maxlength = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'maxlength',
+		$elm$core$String$fromInt(n));
+};
 var $elm$virtual_dom$VirtualDom$node = function (tag) {
 	return _VirtualDom_node(
 		_VirtualDom_noScript(tag));
@@ -5891,7 +5897,8 @@ var $author$project$Main$view = function (model) {
 						A2($elm$html$Html$Attributes$attribute, 'inputmode', 'numeric'),
 						$elm$html$Html$Attributes$value('$' + model.income),
 						$elm$html$Html$Events$onInput($author$project$Main$Income),
-						$elm$html$Html$Attributes$autofocus(true)
+						$elm$html$Html$Attributes$autofocus(true),
+						$elm$html$Html$Attributes$maxlength(14)
 					]),
 				_List_Nil),
 				A2(

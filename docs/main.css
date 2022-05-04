@@ -90,8 +90,7 @@ main {
     text-align: center;
     margin: auto;
     display: block;
-    width: 100%;
-    max-width: 300px; }
+    width: 100%; }
   main #intro {
     margin-bottom: 25px; }
     main #intro p {

@@ -66,7 +66,7 @@ view model =
             [ h1 [] [ text "Australian Income Tax Calculator 2022" ]
             ]
         , h2 [] [ text "Taxable Income" ]
-        , input [ type_ "input", attribute "inputmode" "numeric", value <| "$" ++ model.income, onInput Income, autofocus True ] []
+        , input [ type_ "input", attribute "inputmode" "numeric", value <| "$" ++ model.income, onInput Income, autofocus True, maxlength 14 ] []
         , h2 [] [ text "Tax Payable" ]
         , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale taxPayable) ]
         , h2 [] [ text "Net after Tax" ]
