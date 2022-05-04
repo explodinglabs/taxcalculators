@@ -4392,6 +4392,10 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 {
 	return a >>> offset;
 });
+var $author$project$Main$Model = function (income) {
+	return {income: income};
+};
+var $author$project$Main$init = $author$project$Main$Model('');
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5180,21 +5184,27 @@ var $elm$core$Task$perform = F2(
 			$elm$core$Task$Perform(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
-var $elm$browser$Browser$element = _Browser_element;
-var $author$project$Main$Model = function (income) {
-	return {income: income};
-};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
-var $author$project$Main$init = function (_v0) {
-	return _Utils_Tuple2(
-		$author$project$Main$Model(''),
-		$elm$core$Platform$Cmd$none);
-};
 var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
-var $author$project$Main$subscriptions = function (_v0) {
-	return $elm$core$Platform$Sub$none;
+var $elm$browser$Browser$sandbox = function (impl) {
+	return _Browser_element(
+		{
+			init: function (_v0) {
+				return _Utils_Tuple2(impl.init, $elm$core$Platform$Cmd$none);
+			},
+			subscriptions: function (_v1) {
+				return $elm$core$Platform$Sub$none;
+			},
+			update: F2(
+				function (msg, model) {
+					return _Utils_Tuple2(
+						A2(impl.update, msg, model),
+						$elm$core$Platform$Cmd$none);
+				}),
+			view: impl.view
+		});
 };
 var $elm$core$String$filter = _String_filter;
 var $elm$core$List$any = F2(
@@ -5234,21 +5244,19 @@ var $elm$core$String$toList = function (string) {
 var $author$project$Main$update = F2(
 	function (msg, model) {
 		var income = msg.a;
-		return _Utils_Tuple2(
-			_Utils_update(
-				model,
-				{
-					income: A2(
-						$elm$core$String$filter,
-						function (x) {
-							return A2(
-								$elm$core$List$member,
-								x,
-								$elm$core$String$toList('.1234567890'));
-						},
-						income)
-				}),
-			$elm$core$Platform$Cmd$none);
+		return _Utils_update(
+			model,
+			{
+				income: A2(
+					$elm$core$String$filter,
+					function (x) {
+						return A2(
+							$elm$core$List$member,
+							x,
+							$elm$core$String$toList('.1234567890'));
+					},
+					income)
+			});
 	});
 var $author$project$Main$Income = function (a) {
 	return {$: 'Income', a: a};
@@ -5932,7 +5940,7 @@ var $author$project$Main$view = function (model) {
 					]))
 			]));
 };
-var $author$project$Main$main = $elm$browser$Browser$element(
-	{init: $author$project$Main$init, subscriptions: $author$project$Main$subscriptions, update: $author$project$Main$update, view: $author$project$Main$view});
+var $author$project$Main$main = $elm$browser$Browser$sandbox(
+	{init: $author$project$Main$init, update: $author$project$Main$update, view: $author$project$Main$view});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(_Utils_Tuple0))(0)}});}(this));

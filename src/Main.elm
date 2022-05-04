@@ -35,18 +35,16 @@ calc income =
         0.0
 
 
-init : () -> ( Model, Cmd Msg )
-init _ =
-    ( Model ""
-    , Cmd.none
-    )
+init : Model
+init =
+    Model ""
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Income income ->
-            ( { model | income = String.filter (\x -> List.member x <| String.toList ".1234567890") income }, Cmd.none )
+            { model | income = String.filter (\x -> List.member x <| String.toList ".1234567890") income }
 
 
 view : Model -> Html Msg
@@ -76,15 +74,9 @@ view model =
         ]
 
 
-subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Sub.none
-
-
 main =
-    Browser.element
+    Browser.sandbox
         { init = init
         , update = update
-        , subscriptions = subscriptions
         , view = view
         }
