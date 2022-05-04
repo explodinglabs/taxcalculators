@@ -54,6 +54,12 @@ view model =
     let
         income =
             Maybe.withDefault 0 <| String.toFloat model.income
+
+        taxPayable =
+            calc income
+
+        netAfterTax =
+            income - taxPayable
     in
     node "main"
         [ class "wrapper" ]
@@ -64,9 +70,9 @@ view model =
         , h2 [] [ text "Taxable Income" ]
         , input [ type_ "input", attribute "inputmode" "numeric", value <| "$" ++ model.income, onInput Income, autofocus True ] []
         , h2 [] [ text "Tax Payable" ]
-        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale (calc income)) ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale taxPayable) ]
         , h2 [] [ text "Net after Tax" ]
-        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale (income - calc income)) ]
+        , div [ class "result" ] [ text <| "$" ++ (String.replace ".00" "" <| format usLocale netAfterTax) ]
         ]
 
 

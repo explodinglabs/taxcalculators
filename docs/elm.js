@@ -5843,6 +5843,8 @@ var $author$project$Main$view = function (model) {
 		$elm$core$Maybe$withDefault,
 		0,
 		$elm$core$String$toFloat(model.income));
+	var taxPayable = $author$project$Main$calc(income);
+	var netAfterTax = income - taxPayable;
 	return A3(
 		$elm$html$Html$node,
 		'main',
@@ -5904,10 +5906,7 @@ var $author$project$Main$view = function (model) {
 							$elm$core$String$replace,
 							'.00',
 							'',
-							A2(
-								$cuducos$elm_format_number$FormatNumber$format,
-								$cuducos$elm_format_number$FormatNumber$Locales$usLocale,
-								$author$project$Main$calc(income))))
+							A2($cuducos$elm_format_number$FormatNumber$format, $cuducos$elm_format_number$FormatNumber$Locales$usLocale, taxPayable)))
 					])),
 				A2(
 				$elm$html$Html$h2,
@@ -5929,10 +5928,7 @@ var $author$project$Main$view = function (model) {
 							$elm$core$String$replace,
 							'.00',
 							'',
-							A2(
-								$cuducos$elm_format_number$FormatNumber$format,
-								$cuducos$elm_format_number$FormatNumber$Locales$usLocale,
-								income - $author$project$Main$calc(income))))
+							A2($cuducos$elm_format_number$FormatNumber$format, $cuducos$elm_format_number$FormatNumber$Locales$usLocale, netAfterTax)))
 					]))
 			]));
 };
