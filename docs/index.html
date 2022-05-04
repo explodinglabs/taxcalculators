@@ -37,51 +37,5 @@
         var app = Elm.Main.init({
             node: document.getElementById("myapp")
         });
-
-        <!-- Server-Sent Events -->
-
-        var eventSource = new EventSource(
-            "/events/" + window.location.href.substr(window.location.href.lastIndexOf('/') + 1)
-        );
-
-        eventSource.onopen = event => {
-            console.log("EventSource open");
-        };
-
-        eventSource.onerror = event => {
-            console.log("EventSource error");
-        };
-
-        eventSource.addEventListener("team-changed", event => {
-            app.ports.messageReceiver.send({
-                typ: "team-changed",
-                data: event.data
-            });
-        });
-
-
-        <!-- Capture click/tap actions -->
-
-        startX = 0;
-
-        window.addEventListener('mousedown', function(e) {
-            startX = e.clientX;
-        }, false);
-
-        window.addEventListener('mouseup', function(e) {
-            const threshold = 10;
-            fromTop = e.clientY / window.innerHeight;
-            fromLeft = e.clientX / window.innerWidth;
-            if ((Math.abs(e.clientX - startX) < threshold) && (fromTop > 0.2)) {
-                if (fromLeft < 0.5) {
-                    app.ports.messageReceiver.send({"typ": "prev", "data": ""});
-                }
-                else {
-                    app.ports.messageReceiver.send({"typ": "next", "data": ""});
-                }
-                e.preventDefault();
-            }
-        }, false);
-
     </script>
 </html>
